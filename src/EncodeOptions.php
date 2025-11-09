@@ -11,14 +11,39 @@ use iamgerwin\Toon\Enums\ToonDelimiter;
  */
 class EncodeOptions
 {
+    /** @var int */
+    public $indent;
+
+    /** @var string */
+    public $delimiter;
+
+    /** @var bool */
+    public $useLengthMarker;
+
+    /** @var bool */
+    public $preferTabular;
+
+    /** @var bool */
+    public $quoteStrings;
+
+    /** @var bool */
+    public $sortKeys;
+
     public function __construct(
-        public int $indent = 2,
-        public ToonDelimiter $delimiter = ToonDelimiter::COMMA,
-        public bool $useLengthMarker = true,
-        public bool $preferTabular = true,
-        public bool $quoteStrings = false,
-        public bool $sortKeys = false,
-    ) {}
+        int $indent = 2,
+        string $delimiter = ToonDelimiter::COMMA,
+        bool $useLengthMarker = true,
+        bool $preferTabular = true,
+        bool $quoteStrings = false,
+        bool $sortKeys = false
+    ) {
+        $this->indent = $indent;
+        $this->delimiter = $delimiter;
+        $this->useLengthMarker = $useLengthMarker;
+        $this->preferTabular = $preferTabular;
+        $this->quoteStrings = $quoteStrings;
+        $this->sortKeys = $sortKeys;
+    }
 
     /**
      * Create compact encoding options (minimal whitespace).
@@ -26,9 +51,10 @@ class EncodeOptions
     public static function compact(): self
     {
         return new self(
-            indent: 0,
-            preferTabular: false,
-            useLengthMarker: false,
+            0,
+            ToonDelimiter::COMMA,
+            false,
+            false
         );
     }
 
@@ -38,8 +64,10 @@ class EncodeOptions
     public static function readable(): self
     {
         return new self(
-            indent: 4,
-            preferTabular: false,
+            4,
+            ToonDelimiter::COMMA,
+            true,
+            false
         );
     }
 
@@ -49,9 +77,10 @@ class EncodeOptions
     public static function tabular(): self
     {
         return new self(
-            indent: 2,
-            preferTabular: true,
-            useLengthMarker: true,
+            2,
+            ToonDelimiter::COMMA,
+            true,
+            true
         );
     }
 }

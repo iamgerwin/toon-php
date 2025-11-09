@@ -14,22 +14,42 @@ class ToonDeserializer
     /**
      * @var list<string>
      */
-    private array $lines = [];
+    private $lines = [];
 
-    private int $currentLine = 0;
+    /**
+     * @var int
+     */
+    private $currentLine = 0;
 
-    public function __construct(
-        private DecodeOptions $options
-    ) {}
+    /**
+     * @var DecodeOptions
+     */
+    private $options;
 
-    public static function deserialize(string $toon, DecodeOptions $options): mixed
+    public function __construct(DecodeOptions $options)
+    {
+        $this->options = $options;
+        $this->lines = [];
+        $this->currentLine = 0;
+    }
+
+    /**
+     * @param string $toon
+     * @param DecodeOptions $options
+     * @return mixed
+     */
+    public static function deserialize(string $toon, DecodeOptions $options)
     {
         $deserializer = new self($options);
 
         return $deserializer->parse($toon);
     }
 
-    private function parse(string $toon): mixed
+    /**
+     * @param string $toon
+     * @return mixed
+     */
+    private function parse(string $toon)
     {
         $toon = trim($toon);
 
@@ -43,7 +63,10 @@ class ToonDeserializer
         return $this->parseValue();
     }
 
-    private function parseValue(): mixed
+    /**
+     * @return mixed
+     */
+    private function parseValue()
     {
         if ($this->currentLine >= count($this->lines)) {
             return null;
@@ -82,7 +105,7 @@ class ToonDeserializer
             return false;
         }
 
-        return str_contains($line, ':');
+        return strpos($line, ':') !== false;
     }
 
     private function isArrayStart(string $line): bool
@@ -90,13 +113,13 @@ class ToonDeserializer
         // Line starts with array marker [...] or tabular format
         return preg_match('/^\[(\d+)\]/', $line) === 1 ||
                preg_match('/^\[(\d+)\]\{/', $line) === 1 ||
-               str_starts_with($line, '[');
+               (substr($line, 0, 1) === '[');
     }
 
     /**
      * @return array<string, mixed>|object
      */
-    private function parseObject(): array|object
+    private function parseObject()
     {
         $result = [];
         $baseIndent = $this->getIndentLevel($this->lines[$this->currentLine]);
@@ -119,11 +142,11 @@ class ToonDeserializer
             }
 
             // Parse key-value pair
-            if (! str_contains($trimmed, ':')) {
+            if (strpos($trimmed, ':') === false) {
                 break;
             }
 
-            [$key, $valueStr] = explode(':', $trimmed, 2);
+            list($key, $valueStr) = explode(':', $trimmed, 2);
             $key = trim($key);
             $valueStr = trim($valueStr);
 
@@ -143,7 +166,11 @@ class ToonDeserializer
         return $this->options->associative ? $result : (object) $result;
     }
 
-    private function parseNestedValue(int $parentIndent): mixed
+    /**
+     * @param int $parentIndent
+     * @return mixed
+     */
+    private function parseNestedValue(int $parentIndent)
     {
         if ($this->currentLine >= count($this->lines)) {
             return null;
@@ -195,15 +222,17 @@ class ToonDeserializer
     }
 
     /**
-     * @return list<mixed>
+     * @param string $values
+     * @param int|null $expectedCount
+     * @return array<int, mixed>
      */
-    private function parseSimpleArray(string $values, ?int $expectedCount = null): array
+    private function parseSimpleArray(string $values, $expectedCount = null): array
     {
         // Try comma first, then tab, then pipe
         $delimiter = ',';
-        if (str_contains($values, "\t")) {
+        if (strpos($values, "\t") !== false) {
             $delimiter = "\t";
-        } elseif (str_contains($values, '|')) {
+        } elseif (strpos($values, '|') !== false) {
             $delimiter = '|';
         }
 
@@ -224,7 +253,9 @@ class ToonDeserializer
     }
 
     /**
-     * @return list<mixed>
+     * @param string $count
+     * @param string $keysStr
+     * @return array<int, array<string, mixed>|object>
      */
     private function parseTabularArray(string $count, string $keysStr): array
     {
@@ -232,9 +263,9 @@ class ToonDeserializer
 
         // Parse keys
         $delimiter = ',';
-        if (str_contains($keysStr, "\t")) {
+        if (strpos($keysStr, "\t") !== false) {
             $delimiter = "\t";
-        } elseif (str_contains($keysStr, '|')) {
+        } elseif (strpos($keysStr, '|') !== false) {
             $delimiter = '|';
         }
 
@@ -291,7 +322,11 @@ class ToonDeserializer
         return $result;
     }
 
-    private function parsePrimitive(string $value): mixed
+    /**
+     * @param string $value
+     * @return mixed
+     */
+    private function parsePrimitive(string $value)
     {
         $value = trim($value);
 
@@ -309,14 +344,14 @@ class ToonDeserializer
         }
 
         // Quoted string
-        if ((str_starts_with($value, '"') && str_ends_with($value, '"')) ||
-            (str_starts_with($value, "'") && str_ends_with($value, "'"))) {
+        if ((substr($value, 0, 1) === '"' && substr($value, -1) === '"') ||
+            (substr($value, 0, 1) === "'" && substr($value, -1) === "'")) {
             return stripslashes(substr($value, 1, -1));
         }
 
         // Number
         if (is_numeric($value)) {
-            if (str_contains($value, '.') || str_contains($value, 'e') || str_contains($value, 'E')) {
+            if (strpos($value, '.') !== false || strpos($value, 'e') !== false || strpos($value, 'E') !== false) {
                 return (float) $value;
             }
 

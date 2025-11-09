@@ -4,45 +4,73 @@ declare(strict_types=1);
 
 namespace iamgerwin\Toon;
 
-use BackedEnum;
 use DateTime;
 use DateTimeInterface;
 use iamgerwin\Toon\Exceptions\EncodingException;
-use UnitEnum;
 
 /**
  * Serializes PHP values to TOON format.
  */
 class ToonSerializer
 {
-    public function __construct(
-        private EncodeOptions $options
-    ) {}
+    /** @var EncodeOptions */
+    private $options;
 
-    public static function serialize(mixed $value, EncodeOptions $options): string
+    public function __construct(EncodeOptions $options)
+    {
+        $this->options = $options;
+    }
+
+    /**
+     * @param mixed $value
+     */
+    public static function serialize($value, EncodeOptions $options): string
     {
         $serializer = new self($options);
 
         return $serializer->serializeValue($value);
     }
 
-    private function serializeValue(mixed $value, int $depth = 0): string
+    /**
+     * @param mixed $value
+     */
+    private function serializeValue($value, int $depth = 0): string
     {
+        if (is_null($value)) {
+            return 'null';
+        }
 
-        return match (true) {
-            is_null($value) => 'null',
-            is_bool($value) => $value ? 'true' : 'false',
-            is_int($value), is_float($value) => $this->serializeNumber($value),
-            is_string($value) => $this->serializeString($value),
-            $value instanceof DateTimeInterface => $this->serializeDateTime($value),
-            $value instanceof UnitEnum => $this->serializeEnum($value),
-            is_array($value) => $this->serializeArray($value, $depth),
-            is_object($value) => $this->serializeObject($value, $depth),
-            default => throw new EncodingException('Unsupported type: '.gettype($value)),
-        };
+        if (is_bool($value)) {
+            return $value ? 'true' : 'false';
+        }
+
+        if (is_int($value) || is_float($value)) {
+            return $this->serializeNumber($value);
+        }
+
+        if (is_string($value)) {
+            return $this->serializeString($value);
+        }
+
+        if ($value instanceof DateTimeInterface) {
+            return $this->serializeDateTime($value);
+        }
+
+        if (is_array($value)) {
+            return $this->serializeArray($value, $depth);
+        }
+
+        if (is_object($value)) {
+            return $this->serializeObject($value, $depth);
+        }
+
+        throw new EncodingException('Unsupported type: '.gettype($value));
     }
 
-    private function serializeNumber(int|float $value): string
+    /**
+     * @param int|float $value
+     */
+    private function serializeNumber($value): string
     {
         if (is_float($value) && (is_infinite($value) || is_nan($value))) {
             return 'null';
@@ -64,10 +92,10 @@ class ToonSerializer
     private function needsQuoting(string $value): bool
     {
         // Quote if contains delimiter, colons, newlines, or looks like a number/boolean/null
-        if (str_contains($value, $this->options->delimiter->value) ||
-            str_contains($value, ':') ||
-            str_contains($value, "\n") ||
-            str_contains($value, "\r") ||
+        if (strpos($value, $this->options->delimiter) !== false ||
+            strpos($value, ':') !== false ||
+            strpos($value, "\n") !== false ||
+            strpos($value, "\r") !== false ||
             in_array(strtolower($value), ['true', 'false', 'null'], true) ||
             is_numeric($value)) {
             return true;
@@ -79,15 +107,6 @@ class ToonSerializer
     private function serializeDateTime(DateTimeInterface $value): string
     {
         return $this->serializeString($value->format(DateTime::ATOM));
-    }
-
-    private function serializeEnum(UnitEnum $value): string
-    {
-        if ($value instanceof BackedEnum) {
-            return $this->serializeValue($value->value);
-        }
-
-        return $this->serializeString($value->name);
     }
 
     /**
@@ -162,10 +181,13 @@ class ToonSerializer
     /**
      * @param  array<array-key, mixed>  $value
      */
+    /**
+     * @param array<array-key, mixed> $value
+     */
     private function serializeSimpleArray(array $value, int $depth): string
     {
         $count = count($value);
-        $delimiter = $this->options->delimiter->value;
+        $delimiter = $this->options->delimiter;
 
         // Check if all values are primitives
         $allPrimitives = true;
@@ -180,7 +202,9 @@ class ToonSerializer
         if ($allPrimitives) {
             // Inline format: [count]: value1,value2,value3
             $marker = $this->options->useLengthMarker ? "[{$count}]: " : '';
-            $items = array_map(fn ($v) => $this->serializeValue($v, $depth), $value);
+            $items = array_map(function ($v) use ($depth) {
+                return $this->serializeValue($v, $depth);
+            }, $value);
 
             return $marker.implode($delimiter, $items);
         }
@@ -192,7 +216,7 @@ class ToonSerializer
 
         foreach ($value as $index => $item) {
             $serialized = $this->serializeValue($item, $depth + 1);
-            if (str_contains($serialized, "\n")) {
+            if (strpos($serialized, "\n") !== false) {
                 $lines[] = $nextIndent.'- '.$index.':';
                 foreach (explode("\n", $serialized) as $line) {
                     $lines[] = $nextIndent.'  '.$line;
@@ -208,20 +232,24 @@ class ToonSerializer
     /**
      * @param  array<array-key, mixed>  $value
      */
+    /**
+     * @param array<array-key, mixed> $value
+     */
     private function serializeTabularArray(array $value, int $depth): string
     {
         if (empty($value)) {
             return '[]';
         }
 
-        $firstItem = (array) $value[array_key_first($value)];
+        reset($value);
+        $firstItem = (array) current($value);
         $keys = array_keys($firstItem);
 
         if ($this->options->sortKeys) {
             sort($keys);
         }
 
-        $delimiter = $this->options->delimiter->value;
+        $delimiter = $this->options->delimiter;
         $count = count($value);
         $keyCount = count($keys);
 
@@ -244,9 +272,9 @@ class ToonSerializer
     }
 
     /**
-     * @param  object|array<array-key, mixed>  $value
+     * @param object|array<array-key, mixed> $value
      */
-    private function serializeObject(object|array $value, int $depth): string
+    private function serializeObject($value, int $depth): string
     {
         $array = (array) $value;
 
@@ -268,7 +296,7 @@ class ToonSerializer
             $cleanKey = $this->cleanObjectKey($key);
             $serialized = $this->serializeValue($val, $depth + 1);
 
-            if (str_contains($serialized, "\n")) {
+            if (strpos($serialized, "\n") !== false) {
                 // Multi-line value
                 $lines[] = $nextIndent.$cleanKey.':';
                 foreach (explode("\n", $serialized) as $line) {
@@ -285,12 +313,15 @@ class ToonSerializer
         return $depth === 0 ? implode("\n", $lines) : "\n".implode("\n", $lines);
     }
 
-    private function cleanObjectKey(string|int $key): string
+    /**
+     * @param string|int $key
+     */
+    private function cleanObjectKey($key): string
     {
         $key = (string) $key;
 
         // Remove null byte prefix for private/protected properties
-        if (str_contains($key, "\0")) {
+        if (strpos($key, "\0") !== false) {
             $parts = explode("\0", $key);
             $key = end($parts);
         }

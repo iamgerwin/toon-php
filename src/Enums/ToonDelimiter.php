@@ -7,9 +7,25 @@ namespace iamgerwin\Toon\Enums;
 /**
  * Delimiter options for TOON array encoding.
  */
-enum ToonDelimiter: string
+class ToonDelimiter
 {
-    case COMMA = ',';
-    case TAB = "\t";
-    case PIPE = '|';
+    public const COMMA = ',';
+    public const TAB = "\t";
+    public const PIPE = '|';
+
+    /**
+     * Get the default delimiter.
+     */
+    public static function default(): string
+    {
+        return self::COMMA;
+    }
+
+    /**
+     * Validate if a delimiter is supported.
+     */
+    public static function isValid(string $delimiter): bool
+    {
+        return in_array($delimiter, [self::COMMA, self::TAB, self::PIPE], true);
+    }
 }

@@ -9,8 +9,12 @@ use iamgerwin\Toon\Toon;
 if (! function_exists('toon')) {
     /**
      * Encode a value to TOON format.
+     *
+     * @param mixed $value
+     * @param EncodeOptions|null $options
+     * @return string
      */
-    function toon(mixed $value, ?EncodeOptions $options = null): string
+    function toon($value, $options = null): string
     {
         return Toon::encode($value, $options);
     }
@@ -19,8 +23,12 @@ if (! function_exists('toon')) {
 if (! function_exists('toon_decode')) {
     /**
      * Decode a TOON string to a PHP value.
+     *
+     * @param string $toon
+     * @param DecodeOptions|null $options
+     * @return mixed
      */
-    function toon_decode(string $toon, ?DecodeOptions $options = null): mixed
+    function toon_decode(string $toon, $options = null)
     {
         return Toon::decode($toon, $options);
     }
@@ -29,8 +37,11 @@ if (! function_exists('toon_decode')) {
 if (! function_exists('toon_compact')) {
     /**
      * Encode to compact TOON format.
+     *
+     * @param mixed $value
+     * @return string
      */
-    function toon_compact(mixed $value): string
+    function toon_compact($value): string
     {
         return Toon::compact($value);
     }
@@ -39,8 +50,11 @@ if (! function_exists('toon_compact')) {
 if (! function_exists('toon_readable')) {
     /**
      * Encode to readable TOON format.
+     *
+     * @param mixed $value
+     * @return string
      */
-    function toon_readable(mixed $value): string
+    function toon_readable($value): string
     {
         return Toon::readable($value);
     }
@@ -49,8 +63,11 @@ if (! function_exists('toon_readable')) {
 if (! function_exists('toon_tabular')) {
     /**
      * Encode to tabular TOON format.
+     *
+     * @param mixed $value
+     * @return string
      */
-    function toon_tabular(mixed $value): string
+    function toon_tabular($value): string
     {
         return Toon::tabular($value);
     }
@@ -60,9 +77,11 @@ if (! function_exists('toon_compare')) {
     /**
      * Compare TOON vs JSON token usage.
      *
-     * @return array{toon: string, json: string, toon_tokens: int, json_tokens: int, savings_percent: float}
+     * @param mixed $value
+     * @param EncodeOptions|null $options
+     * @return array<string, mixed> Array with keys: toon, json, toon_tokens, json_tokens, savings_percent
      */
-    function toon_compare(mixed $value, ?EncodeOptions $options = null): array
+    function toon_compare($value, $options = null): array
     {
         return Toon::compare($value, $options);
     }

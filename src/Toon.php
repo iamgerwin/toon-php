@@ -24,9 +24,11 @@ class Toon
      *
      * @throws ToonException
      */
-    public static function encode(mixed $value, ?EncodeOptions $options = null): string
+    public static function encode($value, $options = null): string
     {
-        $options ??= new EncodeOptions;
+        if ($options === null) {
+            $options = new EncodeOptions();
+        }
 
         return ToonSerializer::serialize($value, $options);
     }
@@ -40,33 +42,44 @@ class Toon
      *
      * @throws ToonException
      */
-    public static function decode(string $toon, ?DecodeOptions $options = null): mixed
+    public static function decode(string $toon, $options = null)
     {
-        $options ??= new DecodeOptions;
+        if ($options === null) {
+            $options = new DecodeOptions();
+        }
 
         return ToonDeserializer::deserialize($toon, $options);
     }
 
     /**
      * Encode to compact TOON format (minimal whitespace).
+     *
+     * @param mixed $value
+     * @return string
      */
-    public static function compact(mixed $value): string
+    public static function compact($value): string
     {
         return self::encode($value, EncodeOptions::compact());
     }
 
     /**
      * Encode to readable TOON format (more whitespace for readability).
+     *
+     * @param mixed $value
+     * @return string
      */
-    public static function readable(mixed $value): string
+    public static function readable($value): string
     {
         return self::encode($value, EncodeOptions::readable());
     }
 
     /**
      * Encode to tabular TOON format (optimized for uniform arrays).
+     *
+     * @param mixed $value
+     * @return string
      */
-    public static function tabular(mixed $value): string
+    public static function tabular($value): string
     {
         return self::encode($value, EncodeOptions::tabular());
     }
@@ -85,9 +98,11 @@ class Toon
     /**
      * Compare TOON vs JSON token usage.
      *
-     * @return array{toon: string, json: string, toon_tokens: int, json_tokens: int, savings_percent: float}
+     * @param mixed $value
+     * @param EncodeOptions|null $options
+     * @return array<string, mixed> Array with keys: toon, json, toon_tokens, json_tokens, savings_percent
      */
-    public static function compare(mixed $value, ?EncodeOptions $options = null): array
+    public static function compare($value, $options = null): array
     {
         $toon = self::encode($value, $options);
         $json = json_encode($value, JSON_THROW_ON_ERROR);
@@ -95,9 +110,10 @@ class Toon
         $toonTokens = self::estimateTokens($toon);
         $jsonTokens = self::estimateTokens($json);
 
-        $savingsPercent = $jsonTokens > 0
-            ? round((($jsonTokens - $toonTokens) / $jsonTokens) * 100, 2)
-            : 0.0;
+        $savingsPercent = 0.0;
+        if ($jsonTokens > 0) {
+            $savingsPercent = round((($jsonTokens - $toonTokens) / $jsonTokens) * 100, 2);
+        }
 
         return [
             'toon' => $toon,

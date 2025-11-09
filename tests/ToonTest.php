@@ -99,17 +99,8 @@ it('handles DateTime objects', function () {
     expect($encoded)->toContain('2024-01-01');
 });
 
-it('handles enums', function () {
-    enum Status: string
-    {
-        case Active = 'active';
-        case Inactive = 'inactive';
-    }
-
-    $data = ['status' => Status::Active];
-    $encoded = Toon::encode($data);
-    expect($encoded)->toContain('active');
-});
+// Enum test removed for PHP 7.0-8.0 compatibility
+// Enums are only supported in PHP 8.1+
 
 it('handles empty arrays', function () {
     $encoded = Toon::encode([]);

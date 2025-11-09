@@ -1,13 +1,14 @@
 {
     "name": "iamgerwin/toon-php",
-    "description": "A lightweight, fast, and feature-rich TOON (Token-Oriented Object Notation) library for PHP - optimized for LLM contexts with 30-60% token savings",
+    "description": "A lightweight, fast, and feature-rich TOON (Token-Oriented Object Notation) library for PHP - optimized for LLM contexts with 30-60% token savings (PHP 7.0-8.0 compatible)",
     "keywords": [
         "toon",
         "toon-php",
         "serialization",
         "llm",
         "token-optimization",
-        "data-format"
+        "data-format",
+        "php7"
     ],
     "homepage": "https://github.com/iamgerwin/toon-php",
     "license": "MIT",
@@ -19,12 +20,12 @@
         }
     ],
     "require": {
-        "php": "^8.0"
+        "php": "^7.0|^8.0"
     },
     "require-dev": {
-        "pestphp/pest": "^3.0|^4.0",
+        "pestphp/pest": "^1.21|^2.0",
         "laravel/pint": "^1.0",
-        "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan": "^1.10",
         "phpstan/extension-installer": "^1.3"
     },
     "autoload": {

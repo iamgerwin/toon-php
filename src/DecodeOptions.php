@@ -9,18 +9,31 @@ namespace iamgerwin\Toon;
  */
 class DecodeOptions
 {
+    /** @var bool */
+    public $strict;
+
+    /** @var bool */
+    public $associative;
+
+    /** @var int */
+    public $depth;
+
     public function __construct(
-        public bool $strict = true,
-        public bool $associative = true,
-        public int $depth = 512,
-    ) {}
+        bool $strict = true,
+        bool $associative = true,
+        int $depth = 512
+    ) {
+        $this->strict = $strict;
+        $this->associative = $associative;
+        $this->depth = $depth;
+    }
 
     /**
      * Create strict decoding options (validation enabled).
      */
     public static function strict(): self
     {
-        return new self(strict: true);
+        return new self(true);
     }
 
     /**
@@ -28,6 +41,6 @@ class DecodeOptions
      */
     public static function lenient(): self
     {
-        return new self(strict: false);
+        return new self(false);
     }
 }

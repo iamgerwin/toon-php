@@ -48,7 +48,7 @@ composer require iamgerwin/toon-php
 ```
 
 **Requirements:**
-- PHP 8.0+ (v2.x - Latest)
+- PHP 8.1+ (v2.x - Latest)
 - PHP 7.0-7.4 (v1.x - Coming soon)
 
 ## Quick Start
@@ -273,10 +273,10 @@ This package maintains the highest quality standards:
 
 - ✅ **PHPStan Level 6** (strict static analysis)
 - ✅ **PSR-12** code style compliance
-- ✅ **100% test coverage** (33 tests, 67 assertions)
+- ✅ **100% test coverage** (29 tests, 63 assertions)
 - ✅ **Zero dependencies** (pure PHP)
 - ✅ **Continuous Integration** (GitHub Actions)
-- ✅ **Multi-version testing** (PHP 8.0-8.4)
+- ✅ **Multi-version testing** (PHP 8.1-8.4)
 
 ```bash
 composer test      # Run Pest test suite
@@ -339,7 +339,7 @@ Contributions are welcome! This package follows:
 
 ## Versioning
 
-- **v2.x** (Latest): PHP 8.0-8.4 with modern features
+- **v2.x** (Latest): PHP 8.1-8.4 with modern features
 - **v1.x** (Planned): PHP 7.0-7.4 compatibility
 
 Composer automatically selects the right version for your PHP installation.

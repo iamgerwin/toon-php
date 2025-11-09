@@ -4,6 +4,18 @@ All notable changes to the **legacy version** of `toon-php` (PHP 7.0-8.0) will b
 
 > **For the latest version (PHP 8.1+)**, see the [main branch CHANGELOG](https://github.com/iamgerwin/toon-php/blob/main/CHANGELOG.md)
 
+## 1.0.1 - 2025-11-09
+
+### Changed
+- Enhanced documentation alignment with main branch v2.0.2
+- Improved README structure for better legacy version clarity
+- Updated version references and upgrade paths
+
+### Documentation
+- Aligned documentation with latest package capabilities
+- Added clearer migration paths to v2.x for PHP 8.1+ users
+- Enhanced examples and usage patterns
+
 ## 1.0.0 - 2025-11-09
 
 Initial legacy release with PHP 7.0-8.0 compatibility

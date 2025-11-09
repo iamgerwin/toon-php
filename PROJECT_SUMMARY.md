@@ -6,8 +6,9 @@ The **toon-php** library has been successfully created, tested, and deployed to 
 
 ### 🎯 Repository
 - **GitHub**: https://github.com/iamgerwin/toon-php
-- **Release**: https://github.com/iamgerwin/toon-php/releases/tag/v2.0.0
-- **Version**: v2.0.0
+- **Releases**:
+  - v2.0.1 (PHP 8.1+) - https://github.com/iamgerwin/toon-php/releases/tag/v2.0.1 - **Recommended & Default**
+  - v1.0.0 (PHP 7.0-8.0) - https://github.com/iamgerwin/toon-php/releases/tag/v1.0.0 - Legacy Support
 - **Package**: iamgerwin/toon-php
 
 ### 📊 Project Stats

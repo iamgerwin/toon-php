@@ -48,8 +48,8 @@ composer require iamgerwin/toon-php
 ```
 
 **Requirements:**
-- PHP 8.1+ (v2.x - Latest)
-- PHP 7.0-7.4 (v1.x - Coming soon)
+- PHP 8.1+ (v2.x - **Recommended**, Latest & Default)
+- PHP 7.0-8.0 (v1.x - Legacy Support)
 
 ## Quick Start
 
@@ -339,10 +339,38 @@ Contributions are welcome! This package follows:
 
 ## Versioning
 
-- **v2.x** (Latest): PHP 8.1-8.4 with modern features
-- **v1.x** (Planned): PHP 7.0-7.4 compatibility
+This library follows [Semantic Versioning](https://semver.org/) with version branches for different PHP versions:
 
-Composer automatically selects the right version for your PHP installation.
+- **v2.x** (Latest & Default): PHP 8.1-8.4 with modern features (Enums, readonly properties, etc.)
+- **v1.x** (Legacy Support): PHP 7.0-8.0 compatibility (No enum support)
+
+**Version 2.x is the recommended and default version** for new projects. Composer will automatically select v2.x for PHP 8.1+ installations and v1.x for PHP 7.0-8.0 installations.
+
+### Installation by PHP Version
+
+```bash
+# PHP 8.1+ (will install v2.x automatically)
+composer require iamgerwin/toon-php
+
+# PHP 7.0-8.0 (will install v1.x automatically)
+composer require iamgerwin/toon-php
+
+# Force specific version
+composer require iamgerwin/toon-php:^2.0  # Latest features (PHP 8.1+)
+composer require iamgerwin/toon-php:^1.0  # Legacy support (PHP 7.0-8.0)
+```
+
+### Feature Differences
+
+| Feature | v2.x (PHP 8.1+) | v1.x (PHP 7.0-8.0) |
+|---------|-----------------|---------------------|
+| TOON Encoding/Decoding | ✅ | ✅ |
+| DateTime Support | ✅ | ✅ |
+| Enum Support | ✅ | ❌ (PHP 8.1+ only) |
+| Tabular Format | ✅ | ✅ |
+| Helper Functions | ✅ | ✅ |
+| PHPStan Analysis | Level 6 | Level 6 |
+| Test Coverage | 29 tests | 32 tests |
 
 ## License
 

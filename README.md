@@ -339,12 +339,17 @@ Contributions are welcome! This package follows:
 
 ## Versioning
 
-This library follows [Semantic Versioning](https://semver.org/) with version branches for different PHP versions:
+This library follows [Semantic Versioning](https://semver.org/) with separate branches for different PHP versions:
 
-- **v2.x** (Latest & Default): PHP 8.1-8.4 with modern features (Enums, readonly properties, etc.)
-- **v1.x** (Legacy Support): PHP 7.0-8.0 compatibility (No enum support)
+- **v2.x** ([main branch](https://github.com/iamgerwin/toon-php)): PHP 8.1-8.4 with modern features - **Latest & Default**
+- **v1.x** ([legacy branch](https://github.com/iamgerwin/toon-php/tree/legacy)): PHP 7.0-8.0 compatibility - **Legacy Support**
 
 **Version 2.x is the recommended and default version** for new projects. Composer will automatically select v2.x for PHP 8.1+ installations and v1.x for PHP 7.0-8.0 installations.
+
+### Branches
+
+- **main** → v2.x (PHP 8.1+) - Active development, latest features
+- **legacy** → v1.x (PHP 7.0-8.0) - Bug fixes only, no new features
 
 ### Installation by PHP Version
 

@@ -12,12 +12,17 @@ A lightweight, fast, and feature-rich **TOON (Token-Oriented Object Notation)** 
 composer require iamgerwin/toon-php
 ```
 
-Requires PHP 8.0 or higher.
+### Requirements
+
+- **v2.x (Latest)**: PHP 8.0 or higher (Recommended)
+- **v1.x (Legacy)**: PHP 7.0-7.4 support (Coming soon)
+
+Composer will automatically select the appropriate version for your PHP installation.
 
 ## Quick Start
 
 ```php
-use iamgerwin\Toon\Toon;
+use iamgerwin\\Toon\\Toon;
 
 // Encode to TOON
 \$data = ['name' => 'John', 'age' => 30];
@@ -39,7 +44,7 @@ use iamgerwin\Toon\Toon;
 - 🎯 30-60% token savings vs JSON
 - 🧪 100% test coverage
 - 🎨 Multiple formatting modes
-- ✨ PHP 8.0-8.4 support
+- ✨ Modern PHP support (8.0-8.4)
 
 ## Testing
 
@@ -48,6 +53,13 @@ composer test
 composer analyse
 composer format
 ```
+
+## Versioning
+
+This package follows [Semantic Versioning](https://semver.org/):
+
+- **v2.x**: PHP 8.0+ with modern features (enums, union types, etc.) - **Latest**
+- **v1.x**: PHP 7.0-7.4 compatibility (planned)
 
 ## License
 

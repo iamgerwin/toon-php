@@ -2,6 +2,15 @@
 
 All notable changes to `toon-php` will be documented in this file.
 
+## Unreleased
+
+### Added
+- Comprehensive DOCUMENTATION.md with complete API reference
+- Detailed examples for all features and use cases
+- Performance benchmarks and cost calculations
+- Best practices guide
+- Error handling documentation
+
 ## v1.0.0 - Legacy PHP 7.0-8.0 Support - 2025-11-09
 
 ### TOON PHP v1.0.0 - Legacy PHP Support

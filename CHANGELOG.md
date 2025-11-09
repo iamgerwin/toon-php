@@ -2,6 +2,129 @@
 
 All notable changes to `toon-php` will be documented in this file.
 
+## v1.0.1 - Documentation Alignment (Legacy) - 2025-11-09
+
+### TOON PHP v1.0.1 - Legacy PHP Support (Documentation Update)
+
+> **Legacy Support for PHP 7.0-8.0** | For modern features, see [v2.x](https://github.com/iamgerwin/toon-php)
+
+Documentation alignment release for legacy PHP 7.0-8.0 support with enhanced clarity and upgrade paths.
+
+#### 📚 What's New
+
+##### Changed
+
+- Enhanced documentation alignment with main branch v2.0.2
+- Improved README structure for better legacy version clarity
+- Updated version references and upgrade paths
+
+##### Documentation
+
+- Aligned documentation with latest package capabilities
+- Added clearer migration paths to v2.x for PHP 8.1+ users
+- Enhanced examples and usage patterns
+
+#### 🎯 Version Information
+
+- **PHP Support**: 7.0, 7.1, 7.2, 7.3, 7.4, 8.0
+- **Branch**: [legacy](https://github.com/iamgerwin/toon-php/tree/legacy)
+- **Status**: 🔧 **Legacy Support** (Maintenance Mode)
+
+#### 📦 Installation
+
+```bash
+# Automatic (Composer selects v1.x for PHP 7.0-8.0)
+composer require iamgerwin/toon-php
+
+# Force v1.x
+composer require iamgerwin/toon-php:^1.0
+
+```
+#### ✨ Features
+
+- ✅ **Complete TOON encoding/decoding** for PHP 7.0-8.0
+- ✅ **30-60% Token Savings** vs JSON
+- ✅ **Zero Dependencies** (pure PHP)
+- ✅ **PHPStan Level 6** (strict static analysis)
+- ✅ **100% Test Coverage** (32 tests, 66 assertions)
+- ✅ **PSR-12 Compliant**
+- ✅ **Traditional PHP Syntax** (compatible with PHP 7.0)
+
+#### ⚠️ Limitations
+
+- ❌ **No Enum Support** (PHP 8.1+ feature)
+- Uses traditional syntax (no constructor promotion, match expressions, or arrow functions)
+
+#### 📊 Performance
+
+Same token savings as v2.x:
+
+| Use Case | JSON Tokens | TOON Tokens | Savings |
+|----------|-------------|-------------|---------|
+| E-commerce Orders | 3,245 | 2,170 | **33.1%** |
+| User Lists | 150 | 82 | **45.3%** |
+| Product Catalogs | 320 | 180 | **43.8%** |
+
+At OpenAI's GPT-4 pricing ($0.03/1K tokens):
+
+- **1M API calls** = $3,000 (JSON) → **$1,500** (TOON)
+- **Annual savings**: **$1,500+**
+
+#### 🎨 Quick Example
+
+```php
+use iamgerwin\Toon\Toon;
+
+// Simple encoding (no enums)
+$order = [
+    'id' => 123,
+    'status' => 'active',  // String instead of enum
+    'amount' => 99.99
+];
+
+$toon = Toon::encode($order);
+// Output:
+//   id: 123
+//   status: active
+//   amount: 99.99
+
+// Tabular format
+$users = [
+    ['id' => 1, 'name' => 'Alice', 'role' => 'admin'],
+    ['id' => 2, 'name' => 'Bob', 'role' => 'user'],
+];
+
+echo Toon::tabular($users);
+// Output:
+// [2]{id,name,role}:
+//   1,Alice,admin
+//   2,Bob,user
+
+```
+#### 📚 Documentation
+
+- [README (Legacy Branch)](https://github.com/iamgerwin/toon-php/blob/legacy/README.md)
+- [CHANGELOG (Legacy Branch)](https://github.com/iamgerwin/toon-php/blob/legacy/CHANGELOG.md)
+
+#### ⬆️ Upgrade to v2.x
+
+If you're on PHP 8.1+, upgrade to [v2.x](https://github.com/iamgerwin/toon-php) for:
+
+- ✅ Full enum support
+- ✅ Modern PHP syntax
+- ✅ Active development
+- ✅ Comprehensive DOCUMENTATION.md
+
+#### 🔄 Versions
+
+- **[v2.x](https://github.com/iamgerwin/toon-php)**: PHP 8.1-8.4 with modern features - **Recommended**
+- **v1.x** (This Release): PHP 7.0-8.0 compatibility - Legacy Support
+
+
+---
+
+**Legacy Support for PHP 7.0-8.0 | Made with ❤️ for the PHP and AI community**
+
 ## v2.0.2 - Documentation Enhancement - 2025-11-09
 
 ### TOON PHP v2.0.2 - Documentation Enhancement
@@ -43,6 +166,7 @@ composer require iamgerwin/toon-php
 
 # Force v2.x
 composer require iamgerwin/toon-php:^2.0
+
 
 ```
 #### 📊 Performance
@@ -94,6 +218,7 @@ echo Toon::tabular($users);
 // [2]{id,name,role}:
 //   1,Alice,admin
 //   2,Bob,user
+
 
 ```
 #### 📚 Documentation
@@ -149,6 +274,7 @@ composer require iamgerwin/toon-php
 
 # Force v1.x
 composer require iamgerwin/toon-php:^1.0
+
 
 
 ```
@@ -211,6 +337,7 @@ echo Toon::tabular($users);
 // [2]{id,name,role}:
 //   1,Alice,admin
 //   2,Bob,user
+
 
 
 ```
@@ -276,6 +403,7 @@ composer require iamgerwin/toon-php
 
 # Force v2.x
 composer require iamgerwin/toon-php:^2.0
+
 
 
 
@@ -347,6 +475,7 @@ echo Toon::tabular($users);
 // [2]{id,name,role}:
 //   1,Alice,admin
 //   2,Bob,user
+
 
 
 
@@ -439,6 +568,7 @@ composer require iamgerwin/toon-php
 
 
 
+
 ```
 #### Quick Start
 
@@ -448,6 +578,7 @@ use iamgerwin\Toon\Toon;
 $data = ['name' => 'John', 'age' => 30];
 $toon = Toon::encode($data);
 $decoded = Toon::decode($toon);
+
 
 
 

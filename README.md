@@ -271,7 +271,7 @@ $toon = Toon::encode($data, $options);
 
 This package maintains the highest quality standards:
 
-- ✅ **PHPStan Level 9** (strictest static analysis)
+- ✅ **PHPStan Level 6** (strict static analysis)
 - ✅ **PSR-12** code style compliance
 - ✅ **100% test coverage** (33 tests, 67 assertions)
 - ✅ **Zero dependencies** (pure PHP)
@@ -280,7 +280,7 @@ This package maintains the highest quality standards:
 
 ```bash
 composer test      # Run Pest test suite
-composer analyse   # PHPStan level 9 analysis
+composer analyse   # PHPStan level 6 analysis
 composer format    # Fix code style with Pint
 ```
 

@@ -27,7 +27,7 @@ class Toon
     public static function encode($value, $options = null): string
     {
         if ($options === null) {
-            $options = new EncodeOptions();
+            $options = new EncodeOptions;
         }
 
         return ToonSerializer::serialize($value, $options);
@@ -45,7 +45,7 @@ class Toon
     public static function decode(string $toon, $options = null)
     {
         if ($options === null) {
-            $options = new DecodeOptions();
+            $options = new DecodeOptions;
         }
 
         return ToonDeserializer::deserialize($toon, $options);
@@ -54,8 +54,7 @@ class Toon
     /**
      * Encode to compact TOON format (minimal whitespace).
      *
-     * @param mixed $value
-     * @return string
+     * @param  mixed  $value
      */
     public static function compact($value): string
     {
@@ -65,8 +64,7 @@ class Toon
     /**
      * Encode to readable TOON format (more whitespace for readability).
      *
-     * @param mixed $value
-     * @return string
+     * @param  mixed  $value
      */
     public static function readable($value): string
     {
@@ -76,8 +74,7 @@ class Toon
     /**
      * Encode to tabular TOON format (optimized for uniform arrays).
      *
-     * @param mixed $value
-     * @return string
+     * @param  mixed  $value
      */
     public static function tabular($value): string
     {
@@ -98,13 +95,14 @@ class Toon
     /**
      * Compare TOON vs JSON token usage.
      *
-     * @param mixed $value
-     * @param EncodeOptions|null $options
+     * Uses compact format to showcase TOON's token savings benefits.
+     *
+     * @param  mixed  $value
      * @return array<string, mixed> Array with keys: toon, json, toon_tokens, json_tokens, savings_percent
      */
-    public static function compare($value, $options = null): array
+    public static function compare($value): array
     {
-        $toon = self::encode($value, $options);
+        $toon = self::compact($value);
         $json = json_encode($value, JSON_THROW_ON_ERROR);
 
         $toonTokens = self::estimateTokens($toon);

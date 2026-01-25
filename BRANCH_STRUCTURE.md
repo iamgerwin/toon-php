@@ -7,14 +7,14 @@ This repository maintains two separate branches for different PHP version suppor
 ### **main** (v2.x) - Modern PHP 8.1+
 - **Status**: ✅ Active Development, Latest & Default
 - **PHP Support**: 8.1, 8.2, 8.3, 8.4
-- **Latest Tag**: v2.0.1
+- **Latest Tag**: v2.0.3
 - **Features**: Full enum support, modern PHP syntax
 - **GitHub**: https://github.com/iamgerwin/toon-php
 
 ### **legacy** (v1.x) - Legacy PHP 7.0-8.0
 - **Status**: ✅ Maintenance Mode (Bug Fixes Only)
 - **PHP Support**: 7.0, 7.1, 7.2, 7.3, 7.4, 8.0
-- **Latest Tag**: v1.0.0
+- **Latest Tag**: v1.0.2
 - **Features**: Traditional PHP syntax, no enums
 - **GitHub**: https://github.com/iamgerwin/toon-php/tree/legacy
 
@@ -24,9 +24,12 @@ This repository maintains two separate branches for different PHP version suppor
 
 | Tag | Branch | PHP Version | Status | Release Date |
 |-----|--------|-------------|--------|--------------|
-| **v2.0.1** | main | 8.1-8.4 | **Latest & Default** | 2025-11-09 |
-| v2.0.0 | main | 8.0-8.4 | Superseded | 2025-11-09 |
-| **v1.0.0** | legacy | 7.0-8.0 | **Legacy Support** | 2025-11-09 |
+| **v2.0.3** | main | 8.1-8.4 | **Latest & Default** | 2026-01-25 |
+| v2.0.2 | main | 8.1-8.4 | Superseded | 2025-11-09 |
+| v2.0.1 | main | 8.1-8.4 | Superseded | 2025-11-09 |
+| **v1.0.2** | legacy | 7.0-8.0 | **Legacy Support** | 2026-01-25 |
+| v1.0.1 | legacy | 7.0-8.0 | Superseded | 2025-11-09 |
+| v1.0.0 | legacy | 7.0-8.0 | Superseded | 2025-11-09 |
 
 ---
 
@@ -35,10 +38,10 @@ This repository maintains two separate branches for different PHP version suppor
 Composer automatically selects the correct version based on your PHP installation:
 
 ```bash
-# PHP 8.1+ → Installs v2.0.1 (from main branch)
+# PHP 8.1+ → Installs v2.0.3 (from main branch)
 composer require iamgerwin/toon-php
 
-# PHP 7.0-8.0 → Installs v1.0.0 (from legacy branch)
+# PHP 7.0-8.0 → Installs v1.0.2 (from legacy branch)
 composer require iamgerwin/toon-php
 
 # Force specific version
@@ -46,7 +49,7 @@ composer require iamgerwin/toon-php:^2.0  # main branch (PHP 8.1+)
 composer require iamgerwin/toon-php:^1.0  # legacy branch (PHP 7.0-8.0)
 ```
 
-**v2.x is set as the default** - Packagist will mark v2.0.1 as the latest version.
+**v2.x is set as the default** - Packagist will mark v2.0.3 as the latest version.
 
 ---
 

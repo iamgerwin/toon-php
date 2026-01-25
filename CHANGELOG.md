@@ -4,6 +4,32 @@ All notable changes to the **legacy version** of `toon-php` (PHP 7.0-8.0) will b
 
 > **For the latest version (PHP 8.1+)**, see the [main branch CHANGELOG](https://github.com/iamgerwin/toon-php/blob/main/CHANGELOG.md)
 
+## v1.0.2 - Compare Method Fix - 2026-01-25
+
+### Fixed
+- **`Toon::compare()` now always uses `compact()` format** instead of accepting an `$options` parameter
+- Removed confusing `$options` parameter to simplify API
+- Ensures `compare` method consistently demonstrates TOON's best-case token savings
+- Updated docblock to clarify that compact format is used for comparison
+
+### Impact
+
+The `compare` method is designed to showcase TOON's benefits over JSON. This fix ensures that:
+
+- Comparisons always use the most token-efficient format (compact)
+- Users see optimal, consistent token savings when using `compare()`
+- The API is simpler and less error-prone
+
+### Installation
+
+```bash
+# Automatic (Composer selects v1.x for PHP 7.0-8.0)
+composer require iamgerwin/toon-php
+
+# Force v1.x
+composer require iamgerwin/toon-php:^1.0
+```
+
 ## 1.0.1 - 2025-11-09
 
 ### Changed

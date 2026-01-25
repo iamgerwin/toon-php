@@ -10,7 +10,9 @@ namespace iamgerwin\Toon\Enums;
 class ToonDelimiter
 {
     public const COMMA = ',';
+
     public const TAB = "\t";
+
     public const PIPE = '|';
 
     /**

@@ -10,9 +10,8 @@ if (! function_exists('toon')) {
     /**
      * Encode a value to TOON format.
      *
-     * @param mixed $value
-     * @param EncodeOptions|null $options
-     * @return string
+     * @param  mixed  $value
+     * @param  EncodeOptions|null  $options
      */
     function toon($value, $options = null): string
     {
@@ -24,8 +23,7 @@ if (! function_exists('toon_decode')) {
     /**
      * Decode a TOON string to a PHP value.
      *
-     * @param string $toon
-     * @param DecodeOptions|null $options
+     * @param  DecodeOptions|null  $options
      * @return mixed
      */
     function toon_decode(string $toon, $options = null)
@@ -38,8 +36,7 @@ if (! function_exists('toon_compact')) {
     /**
      * Encode to compact TOON format.
      *
-     * @param mixed $value
-     * @return string
+     * @param  mixed  $value
      */
     function toon_compact($value): string
     {
@@ -51,8 +48,7 @@ if (! function_exists('toon_readable')) {
     /**
      * Encode to readable TOON format.
      *
-     * @param mixed $value
-     * @return string
+     * @param  mixed  $value
      */
     function toon_readable($value): string
     {
@@ -64,8 +60,7 @@ if (! function_exists('toon_tabular')) {
     /**
      * Encode to tabular TOON format.
      *
-     * @param mixed $value
-     * @return string
+     * @param  mixed  $value
      */
     function toon_tabular($value): string
     {
@@ -77,8 +72,8 @@ if (! function_exists('toon_compare')) {
     /**
      * Compare TOON vs JSON token usage.
      *
-     * @param mixed $value
-     * @param EncodeOptions|null $options
+     * @param  mixed  $value
+     * @param  EncodeOptions|null  $options
      * @return array<string, mixed> Array with keys: toon, json, toon_tokens, json_tokens, savings_percent
      */
     function toon_compare($value, $options = null): array

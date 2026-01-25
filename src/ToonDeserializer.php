@@ -34,8 +34,6 @@ class ToonDeserializer
     }
 
     /**
-     * @param string $toon
-     * @param DecodeOptions $options
      * @return mixed
      */
     public static function deserialize(string $toon, DecodeOptions $options)
@@ -46,7 +44,6 @@ class ToonDeserializer
     }
 
     /**
-     * @param string $toon
      * @return mixed
      */
     private function parse(string $toon)
@@ -146,7 +143,7 @@ class ToonDeserializer
                 break;
             }
 
-            list($key, $valueStr) = explode(':', $trimmed, 2);
+            [$key, $valueStr] = explode(':', $trimmed, 2);
             $key = trim($key);
             $valueStr = trim($valueStr);
 
@@ -167,7 +164,6 @@ class ToonDeserializer
     }
 
     /**
-     * @param int $parentIndent
      * @return mixed
      */
     private function parseNestedValue(int $parentIndent)
@@ -222,8 +218,7 @@ class ToonDeserializer
     }
 
     /**
-     * @param string $values
-     * @param int|null $expectedCount
+     * @param  int|null  $expectedCount
      * @return array<int, mixed>
      */
     private function parseSimpleArray(string $values, $expectedCount = null): array
@@ -253,8 +248,6 @@ class ToonDeserializer
     }
 
     /**
-     * @param string $count
-     * @param string $keysStr
      * @return array<int, array<string, mixed>|object>
      */
     private function parseTabularArray(string $count, string $keysStr): array
@@ -323,7 +316,6 @@ class ToonDeserializer
     }
 
     /**
-     * @param string $value
      * @return mixed
      */
     private function parsePrimitive(string $value)

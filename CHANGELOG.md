@@ -2,128 +2,50 @@
 
 All notable changes to `toon-php` will be documented in this file.
 
-## v1.0.1 - Documentation Alignment (Legacy) - 2025-11-09
+## v2.0.3 - Compare Method Fix - 2026-01-25
 
-### TOON PHP v1.0.1 - Legacy PHP Support (Documentation Update)
+### TOON PHP v2.0.3 - Compare Method Fix
 
-> **Legacy Support for PHP 7.0-8.0** | For modern features, see [v2.x](https://github.com/iamgerwin/toon-php)
+> **Latest Release** | PHP 8.1-8.4 Support
 
-Documentation alignment release for legacy PHP 7.0-8.0 support with enhanced clarity and upgrade paths.
+Bug fix release for the `compare` method to properly showcase TOON's token savings benefits.
 
-#### 📚 What's New
+#### 🐛 What's Fixed
 
 ##### Changed
 
-- Enhanced documentation alignment with main branch v2.0.2
-- Improved README structure for better legacy version clarity
-- Updated version references and upgrade paths
+- **`Toon::compare()` now always uses `compact()` format** instead of accepting an `$options` parameter
+- Removed confusing `$options` parameter to simplify the API
+- Ensures `compare` method consistently demonstrates TOON's best-case token savings
+- Updated docblock to clarify that compact format is used for comparison
 
-##### Documentation
+#### 🎯 Impact
 
-- Aligned documentation with latest package capabilities
-- Added clearer migration paths to v2.x for PHP 8.1+ users
-- Enhanced examples and usage patterns
+The `compare` method is designed to showcase TOON's benefits over JSON. This fix ensures that:
 
-#### 🎯 Version Information
-
-- **PHP Support**: 7.0, 7.1, 7.2, 7.3, 7.4, 8.0
-- **Branch**: [legacy](https://github.com/iamgerwin/toon-php/tree/legacy)
-- **Status**: 🔧 **Legacy Support** (Maintenance Mode)
+- Comparisons always use the most token-efficient format (compact)
+- Users see optimal, consistent token savings when using `compare()`
+- The API is simpler and less error-prone
 
 #### 📦 Installation
 
 ```bash
-# Automatic (Composer selects v1.x for PHP 7.0-8.0)
+# Automatic (recommended for PHP 8.1+)
 composer require iamgerwin/toon-php
 
-# Force v1.x
-composer require iamgerwin/toon-php:^1.0
-
+# Force v2.x
+composer require iamgerwin/toon-php:^2.0
 ```
+
 #### ✨ Features
 
-- ✅ **Complete TOON encoding/decoding** for PHP 7.0-8.0
+- ✅ **Full Enum Support** (BackedEnum, UnitEnum)
+- ✅ **Modern PHP 8.1+ Syntax** (constructor promotion, match expressions, arrow functions)
 - ✅ **30-60% Token Savings** vs JSON
 - ✅ **Zero Dependencies** (pure PHP)
 - ✅ **PHPStan Level 6** (strict static analysis)
-- ✅ **100% Test Coverage** (32 tests, 66 assertions)
+- ✅ **100% Test Coverage** (29 tests, 63 assertions)
 - ✅ **PSR-12 Compliant**
-- ✅ **Traditional PHP Syntax** (compatible with PHP 7.0)
-
-#### ⚠️ Limitations
-
-- ❌ **No Enum Support** (PHP 8.1+ feature)
-- Uses traditional syntax (no constructor promotion, match expressions, or arrow functions)
-
-#### 📊 Performance
-
-Same token savings as v2.x:
-
-| Use Case | JSON Tokens | TOON Tokens | Savings |
-|----------|-------------|-------------|---------|
-| E-commerce Orders | 3,245 | 2,170 | **33.1%** |
-| User Lists | 150 | 82 | **45.3%** |
-| Product Catalogs | 320 | 180 | **43.8%** |
-
-At OpenAI's GPT-4 pricing ($0.03/1K tokens):
-
-- **1M API calls** = $3,000 (JSON) → **$1,500** (TOON)
-- **Annual savings**: **$1,500+**
-
-#### 🎨 Quick Example
-
-```php
-use iamgerwin\Toon\Toon;
-
-// Simple encoding (no enums)
-$order = [
-    'id' => 123,
-    'status' => 'active',  // String instead of enum
-    'amount' => 99.99
-];
-
-$toon = Toon::encode($order);
-// Output:
-//   id: 123
-//   status: active
-//   amount: 99.99
-
-// Tabular format
-$users = [
-    ['id' => 1, 'name' => 'Alice', 'role' => 'admin'],
-    ['id' => 2, 'name' => 'Bob', 'role' => 'user'],
-];
-
-echo Toon::tabular($users);
-// Output:
-// [2]{id,name,role}:
-//   1,Alice,admin
-//   2,Bob,user
-
-```
-#### 📚 Documentation
-
-- [README (Legacy Branch)](https://github.com/iamgerwin/toon-php/blob/legacy/README.md)
-- [CHANGELOG (Legacy Branch)](https://github.com/iamgerwin/toon-php/blob/legacy/CHANGELOG.md)
-
-#### ⬆️ Upgrade to v2.x
-
-If you're on PHP 8.1+, upgrade to [v2.x](https://github.com/iamgerwin/toon-php) for:
-
-- ✅ Full enum support
-- ✅ Modern PHP syntax
-- ✅ Active development
-- ✅ Comprehensive DOCUMENTATION.md
-
-#### 🔄 Versions
-
-- **[v2.x](https://github.com/iamgerwin/toon-php)**: PHP 8.1-8.4 with modern features - **Recommended**
-- **v1.x** (This Release): PHP 7.0-8.0 compatibility - Legacy Support
-
-
----
-
-**Legacy Support for PHP 7.0-8.0 | Made with ❤️ for the PHP and AI community**
 
 ## v2.0.2 - Documentation Enhancement - 2025-11-09
 

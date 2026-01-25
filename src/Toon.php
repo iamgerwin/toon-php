@@ -85,11 +85,13 @@ class Toon
     /**
      * Compare TOON vs JSON token usage.
      *
+     * Uses compact format to showcase TOON's token savings benefits.
+     *
      * @return array{toon: string, json: string, toon_tokens: int, json_tokens: int, savings_percent: float}
      */
-    public static function compare(mixed $value, ?EncodeOptions $options = null): array
+    public static function compare(mixed $value): array
     {
-        $toon = self::encode($value, $options);
+        $toon = self::compact($value);
         $json = json_encode($value, JSON_THROW_ON_ERROR);
 
         $toonTokens = self::estimateTokens($toon);

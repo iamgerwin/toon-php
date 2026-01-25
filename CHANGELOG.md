@@ -2,6 +2,73 @@
 
 All notable changes to `toon-php` will be documented in this file.
 
+## v1.0.2 - Compare Method Fix (Legacy PHP 7.0-8.0) - 2026-01-25
+
+#### 🐛 Bug Fix: Compare Method Improvement
+
+This release fixes the `compare` method to properly showcase TOON's token savings benefits by always using the most efficient format.
+
+**Legacy Version**: For PHP 7.0-8.0 support. For the latest version with modern PHP features (PHP 8.1+), see [v2.x](https://github.com/iamgerwin/toon-php).
+
+##### What's Changed
+
+###### Fixed
+
+- **`Toon::compare()` now always uses `compact()` format** instead of accepting an `\$options` parameter
+- Removed confusing `\$options` parameter to simplify API
+- Ensures `compare` method consistently demonstrates TOON's best-case token savings
+- Updated docblock to clarify that compact format is used for comparison
+
+##### Impact
+
+The `compare` method is designed to showcase TOON's benefits over JSON. This fix ensures that:
+
+- Comparisons always use the most token-efficient format (compact)
+- Users see optimal, consistent token savings when using `compare()`
+- The API is simpler and less error-prone
+
+##### Installation
+
+```bash
+
+### Automatic (Composer selects v1.x for PHP 7.0-8.0)
+
+composer require iamgerwin/toon-php
+
+### Force v1.x
+
+composer require iamgerwin/toon-php:^1.0
+```
+
+##### Features
+
+- ✅ **Complete TOON encoding/decoding** for PHP 7.0-8.0
+- ✅ **30-60% Token Savings** vs JSON
+- ✅ **Zero Dependencies** (pure PHP)
+- ✅ **PHPStan Level 6** (strict static analysis)
+- ✅ **100% Test Coverage** (32 tests, 66 assertions)
+- ✅ **PSR-12 Compliant**
+- ✅ **Traditional PHP Syntax** (compatible with PHP 7.0)
+
+##### Documentation
+
+- [Full Documentation](https://github.com/iamgerwin/toon-php/tree/legacy#readme)
+- [Changelog](https://github.com/iamgerwin/toon-php/blob/legacy/CHANGELOG.md)
+- [Latest Version (v2.x)](https://github.com/iamgerwin/toon-php)
+
+##### Upgrade from v1.0.1
+
+No breaking changes. Simply update:
+
+```bash
+composer update iamgerwin/toon-php
+```
+
+
+---
+
+**Full Changelog**: https://github.com/iamgerwin/toon-php/compare/v1.0.1...v1.0.2
+
 ## v2.0.3 - Compare Method Fix - 2026-01-25
 
 ### TOON PHP v2.0.3 - Compare Method Fix
@@ -35,8 +102,8 @@ composer require iamgerwin/toon-php
 
 # Force v2.x
 composer require iamgerwin/toon-php:^2.0
-```
 
+```
 #### ✨ Features
 
 - ✅ **Full Enum Support** (BackedEnum, UnitEnum)
@@ -90,6 +157,7 @@ composer require iamgerwin/toon-php
 composer require iamgerwin/toon-php:^2.0
 
 
+
 ```
 #### 📊 Performance
 
@@ -140,6 +208,7 @@ echo Toon::tabular($users);
 // [2]{id,name,role}:
 //   1,Alice,admin
 //   2,Bob,user
+
 
 
 ```
@@ -196,6 +265,7 @@ composer require iamgerwin/toon-php
 
 # Force v1.x
 composer require iamgerwin/toon-php:^1.0
+
 
 
 
@@ -262,6 +332,7 @@ echo Toon::tabular($users);
 
 
 
+
 ```
 #### 📚 Documentation
 
@@ -325,6 +396,7 @@ composer require iamgerwin/toon-php
 
 # Force v2.x
 composer require iamgerwin/toon-php:^2.0
+
 
 
 
@@ -397,6 +469,7 @@ echo Toon::tabular($users);
 // [2]{id,name,role}:
 //   1,Alice,admin
 //   2,Bob,user
+
 
 
 
@@ -491,6 +564,7 @@ composer require iamgerwin/toon-php
 
 
 
+
 ```
 #### Quick Start
 
@@ -500,6 +574,7 @@ use iamgerwin\Toon\Toon;
 $data = ['name' => 'John', 'age' => 30];
 $toon = Toon::encode($data);
 $decoded = Toon::decode($toon);
+
 
 
 

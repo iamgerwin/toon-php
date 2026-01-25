@@ -22,7 +22,7 @@ class ToonSerializer
     }
 
     /**
-     * @param mixed $value
+     * @param  mixed  $value
      */
     public static function serialize($value, EncodeOptions $options): string
     {
@@ -32,7 +32,7 @@ class ToonSerializer
     }
 
     /**
-     * @param mixed $value
+     * @param  mixed  $value
      */
     private function serializeValue($value, int $depth = 0): string
     {
@@ -68,7 +68,7 @@ class ToonSerializer
     }
 
     /**
-     * @param int|float $value
+     * @param  int|float  $value
      */
     private function serializeNumber($value): string
     {
@@ -182,7 +182,7 @@ class ToonSerializer
      * @param  array<array-key, mixed>  $value
      */
     /**
-     * @param array<array-key, mixed> $value
+     * @param  array<array-key, mixed>  $value
      */
     private function serializeSimpleArray(array $value, int $depth): string
     {
@@ -233,7 +233,7 @@ class ToonSerializer
      * @param  array<array-key, mixed>  $value
      */
     /**
-     * @param array<array-key, mixed> $value
+     * @param  array<array-key, mixed>  $value
      */
     private function serializeTabularArray(array $value, int $depth): string
     {
@@ -272,7 +272,7 @@ class ToonSerializer
     }
 
     /**
-     * @param object|array<array-key, mixed> $value
+     * @param  object|array<array-key, mixed>  $value
      */
     private function serializeObject($value, int $depth): string
     {
@@ -314,7 +314,7 @@ class ToonSerializer
     }
 
     /**
-     * @param string|int $key
+     * @param  string|int  $key
      */
     private function cleanObjectKey($key): string
     {
